@@ -672,9 +672,17 @@ h1,h2,h3{line-height:1.15}
 
   /* ---- portada ---- */
   #manualOverlay .portada{text-align:center; padding-top:6px}
-  #manualOverlay .portada .av{width:112px; height:112px; border-radius:50%; border:5px solid var(--bg); box-shadow:var(--relieve-alto); object-fit:cover; margin-bottom:14px; background:#fff}
-  #manualOverlay .portada h1{font-family:'Fredoka'; font-weight:600; font-size:1.5rem; color:var(--navy-osc); line-height:1.18; margin-bottom:8px}
+  #manualOverlay .pd-head{display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:16px}
+  #manualOverlay .portada .av{width:80px; height:80px; border-radius:50%; border:4px solid var(--bg); box-shadow:var(--relieve-alto); object-fit:cover; margin-bottom:0; background:#fff; flex-shrink:0}
+  #manualOverlay .pd-brand-block{display:flex; flex-direction:column; align-items:flex-start; gap:3px}
+  #manualOverlay .pd-logo{height:34px; width:auto; object-fit:contain}
+  #manualOverlay .pd-city{font-family:'Fredoka'; font-weight:500; font-size:.8rem; letter-spacing:2.5px; color:var(--teal); text-transform:uppercase; padding-left:2px}
+  #manualOverlay .portada h1{font-family:'Fredoka'; font-weight:600; font-size:1.5rem; color:var(--navy-osc); line-height:1.18; margin-bottom:14px}
   #manualOverlay .portada .intro{font-size:.95rem; color:#41576e; line-height:1.55; margin-bottom:18px; padding:0 6px}
+
+  /* Botón WhatsApp de la portada — simple, mismo lenguaje visual del resto del sitio */
+  #manualOverlay .pd-wa{display:block; text-align:center; background:var(--ok); color:#fff; text-decoration:none; font-family:'Fredoka'; font-weight:600; font-size:.88rem; line-height:1.35; padding:13px 20px; border-radius:20px; margin:0 auto 18px; max-width:320px; cursor:pointer; box-shadow:0 5px 14px rgba(5,150,105,.28); transition:.15s}
+  #manualOverlay .pd-wa:active{transform:translateY(1px)}
 
   /* bloque de valoración al inicio con RX */
   #manualOverlay .valoracion-inicio{background:linear-gradient(135deg,#0d3a5c,#06263f); border-radius:18px; padding:16px 16px 14px; margin:0 0 18px; box-shadow:var(--relieve-alto); border:2px solid rgba(255,255,255,.1); color:#fff}
@@ -861,8 +869,15 @@ const AV = AVATAR_ACTIVO;
 // ---- PORTADA ----
 const PORTADA = `
   <div class="portada">
-    <img class="av" src="${AV}" alt="Dr. Alvarado">
+    <div class="pd-head">
+      <img class="av" src="${AV}" alt="Dr. Alvarado">
+      <div class="pd-brand-block">
+        <img class="pd-logo" src="dentilike-logo-completo.png" alt="Dentilike Ortodoncia">
+        <div class="pd-city">San Luis Potosí</div>
+      </div>
+    </div>
     <h1>Antes de empezar,<br>déjame explicarte 👋</h1>
+    <a class="pd-wa" href="#" onclick="event.preventDefault();window.open(waLink(),'_blank')">💬 Prefiero hablar directamente con el Dr. por WhatsApp</a>
     <div class="intro">Como un pequeño manual, te muestro todo en <b>3 partes</b>. Puedes seguir el orden o ir directo a lo que te interese.</div>
     <div class="valoracion-inicio">
       <div class="vi-badge">✨ EMPIEZA AQUÍ</div>
