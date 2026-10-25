@@ -746,9 +746,9 @@ body.fest-muertos{--cta1:#f6a623; --cta2:#d97706; --cta-borde:#a85a04; --cta-glo
 .barra .ag{background:linear-gradient(135deg,var(--cta1),var(--cta2)) !important; box-shadow:0 3px 0 var(--cta-borde), 0 6px 16px var(--cta-glow) !important}
 /* ===== Decoración de temporada ===== */
 .fest-deco{position:fixed; inset:0; pointer-events:none; z-index:95; overflow:hidden}
-.fest-deco .vuela{position:absolute; left:-60px; font-size:22px; opacity:.55; animation:festVuela linear infinite}
+.fest-deco .vuela{position:absolute; left:-60px; font-size:22px; opacity:.7; animation:festVuela linear infinite}
 @keyframes festVuela{0%{transform:translate(0,0) rotate(-6deg)}25%{transform:translate(28vw,-24px) rotate(6deg)}50%{transform:translate(56vw,10px) rotate(-6deg)}75%{transform:translate(84vw,-18px) rotate(6deg)}100%{transform:translate(115vw,0) rotate(-6deg)}}
-.fest-deco .cae{position:absolute; top:-40px; font-size:18px; opacity:.6; animation:festCae linear infinite}
+.fest-deco .cae{position:absolute; top:-40px; font-size:18px; opacity:.72; animation:festCae linear infinite}
 @keyframes festCae{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(24px,52vh) rotate(180deg)}100%{transform:translate(-10px,108vh) rotate(360deg)}}
 .fest-tela{position:absolute; top:0; right:0; width:92px; height:92px; opacity:.5; pointer-events:none}
 .fest-picado{height:26px; margin:-4px -4px 10px; background:
@@ -768,8 +768,8 @@ body.fest-patrias .fest-saludo{background:#e8f5ee; color:#006847}
 body.fest-navidad .fest-saludo{background:#fdecec; color:#a8161c}
 body.fest-anonuevo .fest-saludo{background:#1d2b44; color:#f3cf63}
 body.fest-sanvalentin .fest-saludo{background:#ffe4ec; color:#c2185b}
-.fest-deco .conf{position:absolute; top:-20px; width:8px; height:12px; border-radius:2px; opacity:.75; animation:festCae linear infinite}
-.fest-deco .sube{position:absolute; bottom:-40px; font-size:18px; opacity:.55; animation:festSube linear infinite}
+.fest-deco .conf{position:absolute; top:-20px; width:9px; height:13px; border-radius:2px; opacity:.85; animation:festCae linear infinite}
+.fest-deco .sube{position:absolute; bottom:-40px; font-size:18px; opacity:.7; animation:festSube linear infinite}
 @keyframes festSube{0%{transform:translate(0,0) scale(.9)}50%{transform:translate(-18px,-55vh) scale(1.05)}100%{transform:translate(12px,-112vh) scale(.9)}}
 .fest-tira{height:22px; margin:-4px -4px 10px; border-radius:6px 6px 0 0}
 .fest-tira.tricolor{background:repeating-linear-gradient(90deg,#006847 0 30px,#fff 30px 60px,#ce1126 60px 90px); clip-path:polygon(0 0,100% 0,100% 55%,96% 100%,92% 55%,88% 100%,84% 55%,80% 100%,76% 55%,72% 100%,68% 55%,64% 100%,60% 55%,56% 100%,52% 55%,48% 100%,44% 55%,40% 100%,36% 55%,32% 100%,28% 55%,24% 100%,20% 55%,16% 100%,12% 55%,8% 100%,4% 55%,0 100%); box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
@@ -1380,11 +1380,12 @@ render();
     anonuevo: { vuela: [], cae: ['✨','✨'], conf: ['#d9a821','#f3cf63','#b8860b','#c0c0c0','#f3cf63','#d9a821'] },
     sanvalentin: { vuela: [], cae: [], sube: ['💗','💕','❤️','💗'] } }[n];
   if(!piezas) return;
+  ['vuela','cae','conf','sube'].forEach(k => { if(piezas[k]) piezas[k] = piezas[k].concat(piezas[k]); });   // el doble de iconitos
   const d = document.createElement('div'); d.className = 'fest-deco'; d.setAttribute('aria-hidden', 'true');
-  piezas.vuela.forEach((e, i) => { const s = document.createElement('span'); s.className = 'vuela'; s.textContent = e; s.style.top = (8 + i * 27) + 'vh'; s.style.animationDuration = (16 + i * 5) + 's'; s.style.animationDelay = (i * 4) + 's'; s.style.fontSize = (18 + i * 4) + 'px'; d.appendChild(s); });
-  piezas.cae.forEach((e, i) => { const s = document.createElement('span'); s.className = 'cae'; s.textContent = e; s.style.left = (10 + i * 23) % 92 + 'vw'; s.style.animationDuration = (14 + i * 4) + 's'; s.style.animationDelay = (i * 3.5) + 's'; d.appendChild(s); });
-  (piezas.conf || []).forEach((c, i) => { const s = document.createElement('span'); s.className = 'conf'; s.style.background = c; s.style.left = (5 + i * 13) % 95 + 'vw'; s.style.animationDuration = (9 + (i % 4) * 3) + 's'; s.style.animationDelay = (i * 1.3) + 's'; if(c === '#ffffff') s.style.boxShadow = '0 0 0 1px #d6dde5'; d.appendChild(s); });
-  (piezas.sube || []).forEach((e, i) => { const s = document.createElement('span'); s.className = 'sube'; s.textContent = e; s.style.left = (12 + i * 24) % 92 + 'vw'; s.style.animationDuration = (15 + i * 4) + 's'; s.style.animationDelay = (i * 3.5) + 's'; d.appendChild(s); });
+  piezas.vuela.forEach((e, i) => { const s = document.createElement('span'); s.className = 'vuela'; s.textContent = e; s.style.top = (6 + i * 15) % 90 + 'vh'; s.style.animationDuration = (14 + (i % 3) * 5) + 's'; s.style.animationDelay = (i * 2.6) + 's'; s.style.fontSize = (20 + (i % 3) * 5) + 'px'; d.appendChild(s); });
+  piezas.cae.forEach((e, i) => { const s = document.createElement('span'); s.className = 'cae'; s.textContent = e; s.style.left = (7 + i * 17) % 94 + 'vw'; s.style.animationDuration = (12 + (i % 4) * 3) + 's'; s.style.animationDelay = (i * 1.9) + 's'; s.style.fontSize = (18 + (i % 3) * 4) + 'px'; d.appendChild(s); });
+  (piezas.conf || []).forEach((c, i) => { const s = document.createElement('span'); s.className = 'conf'; s.style.background = c; s.style.left = (3 + i * 11) % 96 + 'vw'; s.style.animationDuration = (9 + (i % 4) * 3) + 's'; s.style.animationDelay = (i * 0.9) + 's'; if(c === '#ffffff') s.style.boxShadow = '0 0 0 1px #d6dde5'; d.appendChild(s); });
+  (piezas.sube || []).forEach((e, i) => { const s = document.createElement('span'); s.className = 'sube'; s.textContent = e; s.style.left = (8 + i * 17) % 92 + 'vw'; s.style.animationDuration = (13 + (i % 4) * 3) + 's'; s.style.animationDelay = (i * 2) + 's'; s.style.fontSize = (18 + (i % 3) * 4) + 'px'; d.appendChild(s); });
   document.body.appendChild(d);
   const tira = { patrias: 'tricolor', navidad: 'luces', anonuevo: 'dorado' }[n];
   const decorarHoja = () => {
