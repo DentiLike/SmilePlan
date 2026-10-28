@@ -1,6 +1,6 @@
 // Service Worker — ARRANQUE INSTANTÁNEO (para datos móviles lentos)
 // App: smileplan
-const CACHE_NAME = "smileplan-v27";
+const CACHE_NAME = "smileplan-v28";
 const ASSETS = ["./", "./index.html", "./manifest.json"];
 
 self.addEventListener("install", (e) => {
